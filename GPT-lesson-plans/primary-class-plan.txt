@@ -6,7 +6,7 @@ What is a Neural Network? | 3Blue1Brown https://www.youtube.com/watch?v=aircAruv
 
 What is Reinforcement Learning? | DeepLizard https://www.youtube.com/watch?v=JgvyzIkgxF0
 
-Deep Reinforcement Learning Crash Course | Sentdex //gpt broken link find later
+Deep Reinforcement Learning Crash Course | Sentdex https://www.youtube.com/playlist?list=PLQVvvaa0QuDc-3szzjeP6N6b0aDrrKyL- 
 
 Mini Project:
 Write a simple Python script implementing a Q-learning algorithm to solve the CartPole problem in OpenAI Gym.
@@ -14,7 +14,7 @@ Write a simple Python script implementing a Q-learning algorithm to solve the Ca
 Block 2: 🎮 Understanding the Game Boy Advance Emulator
 Goal: Learn how to interface and script gameplay with the Game Boy Advance emulator (mGBA or VBA-M).
 
-mGBA Emulator Official Documentation // broken link find later
+mGBA Emulator Official Documentation https://github.com/mgba-emu/mgba 
 
 Interacting with Game Emulators in Python https://pypi.org/project/pyboy/
 
@@ -30,7 +30,7 @@ Python PIL (Pillow) Image Processing https://pillow.readthedocs.io/en/stable/
 
 PyAutoGUI for screenshot automation https://pyautogui.readthedocs.io/en/latest/screenshot.html
 
-OpenCV Image Recognition Basics // broken link find later
+OpenCV Image Recognition Basics https://www.youtube.com/watch?v=WQeoO7MI0Bs 
 
 Mini Project:
 Implement a Python script that continuously captures screenshots of the emulator screen and identifies player health bars using OpenCV.
@@ -62,9 +62,9 @@ Build a simple CNN in Python (Keras or PyTorch) capable of classifying screensho
 Block 6: 🧠 Implementing Reinforcement Learning Algorithms
 Goal: Understand and implement a Deep Q-Network (DQN) for your neural network.
 
-Deep Q-Learning Explanation & Implementation // broken link
+Deep Q-Learning Explanation & Implementation https://www.youtube.com/watch?v=wc-FxNENg9U
 
-Deep Reinforcement Learning with Python // broken link
+Deep Reinforcement Learning with Python https://github.com/PacktPublishing/Deep-Reinforcement-Learning-Hands-On 
 
 Stable-Baselines3 Reinforcement Learning Library Documentation https://stable-baselines3.readthedocs.io/en/master/ 
 
@@ -74,11 +74,11 @@ Train a basic Deep Q-Network to play a simple Gym environment (e.g., MountainCar
 Block 7: 🎲 Integrating Neural Network with Emulator
 Goal: Integrate your neural network (DQN) with the GBA emulator environment.
 
-Reinforcement Learning & Emulator Integration Example
+Reinforcement Learning & Emulator Integration Example https://github.com/openai/retro 
 
-Gym Retro Library for Game Emulation & RL
+Gym Retro Library for Game Emulation & RL https://retro.readthedocs.io/en/latest/ 
 
-Customizing Gym Environments
+Customizing Gym Environments // broken link
 
 Mini Project:
 Create a custom Gym environment class wrapping your GBA emulator and providing the neural network with game screen states and input actions.
@@ -86,11 +86,11 @@ Create a custom Gym environment class wrapping your GBA emulator and providing t
 Block 8: 🚀 Training Your AI to Play Street Fighter 2
 Goal: Run initial training sessions and fine-tune your neural network for Street Fighter 2.
 
-Fine-Tuning Deep Reinforcement Learning Models
+Fine-Tuning Deep Reinforcement Learning Models https://spinningup.openai.com/en/latest/spinningup/rl_intro3.html 
 
-Hyperparameter Optimization in RL
+Hyperparameter Optimization in RL // broken link
 
-Managing Model Checkpoints and Logs (TensorBoard)
+Managing Model Checkpoints and Logs (TensorBoard) // broken link
 
 Mini Project:
 Run multiple training episodes, saving checkpoints, and analyze results through TensorBoard.
@@ -98,11 +98,11 @@ Run multiple training episodes, saving checkpoints, and analyze results through 
 Block 9: 📊 Evaluation and Improving Performance
 Goal: Assess your neural network’s performance and implement strategies to improve results.
 
-RL Policy Evaluation
+RL Policy Evaluation // broken link
 
-Analyzing AI performance in games
+Analyzing AI performance in games // broken link
 
-Improving AI Through Reward Shaping
+Improving AI Through Reward Shaping // broken link
 
 Mini Project:
 Implement reward shaping or action constraints to significantly improve your AI’s win-rate against CPU characters.
@@ -110,9 +110,9 @@ Implement reward shaping or action constraints to significantly improve your AI�
 Block 10: 🎓 Final Deployment & Showcase
 Goal: Showcase your trained AI agent successfully playing Street Fighter 2 against various CPU opponents.
 
-Deploying PyTorch Models
+Deploying PyTorch Models // broken link
 
-Creating Demo Videos of AI Gameplay
+Creating Demo Videos of AI Gameplay https://opencv.org/
 
 Documenting AI Projects on GitHub
 
