@@ -1,0 +1,123 @@
+📚 Lesson Plan: Neural Networks & Game Automation with Street Fighter 2 (GBA Emulator)
+Block 1: 🤖 Introduction to Neural Networks and Reinforcement Learning
+Goal: Understand the core concepts of neural networks and reinforcement learning.
+
+What is a Neural Network? | 3Blue1Brown https://www.youtube.com/watch?v=aircAruvnKk 
+
+What is Reinforcement Learning? | DeepLizard https://www.youtube.com/watch?v=JgvyzIkgxF0
+
+Deep Reinforcement Learning Crash Course | Sentdex //gpt broken link find later
+
+Mini Project:
+Write a simple Python script implementing a Q-learning algorithm to solve the CartPole problem in OpenAI Gym.
+
+Block 2: 🎮 Understanding the Game Boy Advance Emulator
+Goal: Learn how to interface and script gameplay with the Game Boy Advance emulator (mGBA or VBA-M).
+
+mGBA Emulator Official Documentation // broken link find later
+
+Interacting with Game Emulators in Python https://pypi.org/project/pyboy/
+
+GBArunner2 & Game Boy Advance ROM hacking basics // broken link find later
+
+Mini Project:
+Create a simple Python script that launches the GBA emulator and automatically presses buttons to navigate a Street Fighter 2 menu.
+
+Block 3: 🧩 Capturing Game State and Visual Data
+Goal: Extract relevant game data (screen pixels, health bars, etc.) from the GBA emulator using Python.
+
+Python PIL (Pillow) Image Processing https://pillow.readthedocs.io/en/stable/
+
+PyAutoGUI for screenshot automation https://pyautogui.readthedocs.io/en/latest/screenshot.html
+
+OpenCV Image Recognition Basics // broken link find later
+
+Mini Project:
+Implement a Python script that continuously captures screenshots of the emulator screen and identifies player health bars using OpenCV.
+
+Block 4: 🔄 Controlling Game Inputs with Python
+Goal: Programmatically control GBA emulator inputs (key presses) using Python scripts.
+
+PyAutoGUI Key Press Automation https://pyautogui.readthedocs.io/en/latest/keyboard.html
+
+Integrating Python Scripts with Emulator Input https://github.com/Baekalfen/PyBoy/wiki/
+
+Python keyboard library for input simulation https://github.com/boppreh/keyboard 
+
+Mini Project:
+Write a script that performs a basic combo move repeatedly in Street Fighter 2 using Python-controlled emulator input.
+
+Block 5: 🌐 Setting Up the Neural Network with Python
+Goal: Create and set up your first neural network architecture suitable for game automation.
+
+PyTorch Beginner Tutorial // broken link
+
+Keras (TensorFlow) Quickstart Guide // broken link
+
+Building a Convolutional Neural Network (CNN) from scratch // broken link
+
+Mini Project:
+Build a simple CNN in Python (Keras or PyTorch) capable of classifying screenshots from Street Fighter into different states (player attack, enemy attack, neutral).
+
+Block 6: 🧠 Implementing Reinforcement Learning Algorithms
+Goal: Understand and implement a Deep Q-Network (DQN) for your neural network.
+
+Deep Q-Learning Explanation & Implementation // broken link
+
+Deep Reinforcement Learning with Python // broken link
+
+Stable-Baselines3 Reinforcement Learning Library Documentation https://stable-baselines3.readthedocs.io/en/master/ 
+
+Mini Project:
+Train a basic Deep Q-Network to play a simple Gym environment (e.g., MountainCar-v0) using Python and PyTorch or Stable-Baselines3.
+
+Block 7: 🎲 Integrating Neural Network with Emulator
+Goal: Integrate your neural network (DQN) with the GBA emulator environment.
+
+Reinforcement Learning & Emulator Integration Example
+
+Gym Retro Library for Game Emulation & RL
+
+Customizing Gym Environments
+
+Mini Project:
+Create a custom Gym environment class wrapping your GBA emulator and providing the neural network with game screen states and input actions.
+
+Block 8: 🚀 Training Your AI to Play Street Fighter 2
+Goal: Run initial training sessions and fine-tune your neural network for Street Fighter 2.
+
+Fine-Tuning Deep Reinforcement Learning Models
+
+Hyperparameter Optimization in RL
+
+Managing Model Checkpoints and Logs (TensorBoard)
+
+Mini Project:
+Run multiple training episodes, saving checkpoints, and analyze results through TensorBoard.
+
+Block 9: 📊 Evaluation and Improving Performance
+Goal: Assess your neural network’s performance and implement strategies to improve results.
+
+RL Policy Evaluation
+
+Analyzing AI performance in games
+
+Improving AI Through Reward Shaping
+
+Mini Project:
+Implement reward shaping or action constraints to significantly improve your AI’s win-rate against CPU characters.
+
+Block 10: 🎓 Final Deployment & Showcase
+Goal: Showcase your trained AI agent successfully playing Street Fighter 2 against various CPU opponents.
+
+Deploying PyTorch Models
+
+Creating Demo Videos of AI Gameplay
+
+Documenting AI Projects on GitHub
+
+Mini Project:
+Record your AI playing a full Street Fighter 2 match, document your entire process, upload your codebase and results to GitHub, and share your AI’s impressive victory 🏆✨.
+
+🎉 Congratulations! 🎉
+Your student has just completed a comprehensive introduction to neural networks, reinforcement learning, and practical AI integration into emulators, enabling their neural network to conquer the fighters of Street Fighter 2! 🌟💪😎
