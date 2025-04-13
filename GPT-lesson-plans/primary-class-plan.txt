@@ -6,7 +6,7 @@ What is a Neural Network? | 3Blue1Brown https://www.youtube.com/watch?v=aircAruv
 
 What is Reinforcement Learning? | DeepLizard https://www.youtube.com/watch?v=JgvyzIkgxF0
 
-Deep Reinforcement Learning Crash Course | Sentdex https://www.youtube.com/playlist?list=PLQVvvaa0QuDc-3szzjeP6N6b0aDrrKyL- 
+Deep Reinforcement Learning Crash Course | Johnny Code https://www.youtube.com/playlist?list=PL58zEckBH8fCMIVzQCRSZVPUp3ZAVagWi  
 
 Mini Project:
 Write a simple Python script implementing a Q-learning algorithm to solve the CartPole problem in OpenAI Gym.
