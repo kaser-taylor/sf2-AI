@@ -59,4 +59,27 @@ Notes:
     - so he goes back to the agen file and he wraps in in a class and the code in a run function
 
     - imports dqn 
-     
+
+- Video #3 
+     - So he is talking about something called Experience Replay
+        - experience replay consists of state, action, new_state, reward, terminated and is passed into a deque
+            - remember a deque is a double ended que that allows you to pop and add to both ends of the queue in o1 time
+        - so it uses this dequeu so the higher reward experiences are closer to the front and the old ones get popped off the back so you dont run out of memory
+        - he then creates a new experience replay file
+        - heres some gpt experience replay notes 
+            - these are the things we need to import for the class from collections 
+            import deque
+            import random
+            import numpy as np
+            import torch
+            - next we need to decide the max number of states we want to store in the deque and we do this with the following 
+            - class ReplayBuffer:
+            def __init__(self, capacity):
+            self.buffer = deque(maxlen=capacity)
+            - next we need a push method that adds the experience which is one time step to the bufffer 
+            -     def push(self, state, action, reward, next_state, done):
+            experience = (state, action, reward, next_state, done)
+            self.buffer.append(experience)
+
+
+
