@@ -49,10 +49,14 @@ Notes:
         state = torch.randn(10, state_dim)
         output = net(state)
         print(output)
-     - so he said that input layer values are implicit and i guess they are defined by state_dim. in my streetfighter game this would be all they like x y values of the player, combo state, etc...
-     - so action_dim are the number of actions the agent file can choose. 
+        - so he said that input layer values are implicit and i guess they are defined by state_dim. in my streetfighter game this would be all they like x y values of the player, combo state, etc...
+        - so action_dim are the number of actions the agent file can choose. 
         - in sf2 this is gonna be initially for the first network things like kick punch jump forward backward etx
-     - the net = DQN(state_dim, action_dim) passes the state and action into a dqn class that runs the network calcs
-     - state = line creates fake data to test if the network actually runs and works 
-     - output = tests the network with the state values
+        - the net = DQN(state_dim, action_dim) passes the state and action into a dqn class that runs the network calcs
+        - state = line creates fake data to test if the network actually runs and works 
+        - output = tests the network with the state values
+
+    - so he goes back to the agen file and he wraps in in a class and the code in a run function
+
+    - imports dqn 
      
