@@ -81,5 +81,41 @@ Notes:
             experience = (state, action, reward, next_state, done)
             self.buffer.append(experience)
 
+        - so now hes adding something called replay memory
+            - so this basically creates a specified number of the replay class that acts in a dequeue fashion
+            - im guessing this is a built in class in pytorch
+        
+        - so he does something interesting. in training you train for a specified number of episodes in pytorch but he imports this tool called itertools which allows you to generate a number indefinetely and then he will stop it manually. I could see using this having its pros and its cons. its pro is definetely you can run it till your satisfied but if youre using resources that are too expensive and forget to shut it off this could be very bad
+
+        - so he just mentioned something called the epsilon greedy algorithm. Idk what that is and I don't think he is going to go in depth so im gonna do some gptsearch
+            - The ε-greedy algorithm says:
+                With probability ε → take a random action (explore)
+                With probability 1 - ε → take the best action from your Q-network (exploit)
+            - so It sounds like you start with a high epsilon value and if that epsilon value is close to one it takes a random action. this is important cause it keeps the dqn from abusing one game action like punching a million times in a row. and you code in a decay so as the training iterates it takes the action that delivers the highest reward
+                - i imagine if you have the resources its viable to make the decay rate and training iterations very high for iterations and low for decay rate so it gets to explore a lot first. theres obviously gonna be a law of diminishing returns on this but if you have the resources why not
+        
+        - so now hes getting into hyperparameters
+            - a hyperparameter is a tool that you control that the ai does not learn
+            - an example is learning rate epsilon hidden layer size etc.
+            - 
+
+- Video #4
+    - Implement Epsilon Greedy and Debug training loop
+
+    - so this seems like a lot of math implementation using built in functions im not particularly sure how to take notes on this video 
+
+    - he keeps bringing up tensors and idk what that is
+        - a tensor is a data structure that is basically nested lists of numbers a 0d tensor is something like an integer no list a 1d tensor is a list of integers a 2d tensor is a list of lists like a matrix and a 3d tensor is a stack of matrixes like an rgb image 
+
+
+- Video #5
+    - okay so this is a 4 min video and targets what seem like really important concepts to know so im gonn have a lot of gpt research notes for this video
+
+    - so loss is = to mean square error (curent q, and target q)
+         - question is what is loss, and what is mean square error
+         - loss 
+            - loss is a number that tells the model how wrong it is
+                - the difference btween what it predicted vs what the correct answer was
+            - 
 
 
