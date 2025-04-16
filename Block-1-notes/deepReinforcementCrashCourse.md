@@ -109,6 +109,80 @@ Notes:
 
 
 - Video #5
+    - this video is about implementing a target network
+    - Okay so I was super confused on target networks and this is the jist. If you have your primary network recursively correct itself based on reward its similar to the event replay problem and it might choose short term reward and suboptimal strategies.
+    
+     so you basically have an older sub optimal network that the network compares what the actual reward was to the older predicted award
+        - this sentence is wrong and it is actually based on something called the Bellman Equation
+        - based on this equation 
+            - target_Q = reward + γ * max(Q_target(next_state))
+        - so reward is the reward that the agent just got for taking an action in the current state
+        - gamma is the discount factor which is how much it cares about future rewards
+        - and then max q_target next state
+            - the target network predicting the q-values for the next state and gives you a future value estimat
+            - this is the one that confuses me the most 
+                - so this value is what the target network says the maximum reward for playing the rest of the game perfectly is
+        
+        - so the reason we use target Q after all this math 
+            - it is the value the q netowrk should have predicted so you try to train the q network to match this 
+
+            - remember this is about incrementally getting better over time not a oneshot best ever training session
+        - heres a history of the bellman equation from gpt for more context 
+            - Instead of trying to solve the full decision path in one go (which explodes in complexity), he said:
+
+            “What if I solve it backwards by defining the value of a state in terms of the value of the next state?”
+
+            This idea is now known as Bellman’s Principle of Optimality:
+
+            "An optimal policy has the property that, whatever the initial state and decision, the remaining decisions must constitute an optimal policy with regard to the state resulting from the first decision."
+
+            Basically: if you’re halfway through your plan, the rest of it should still be optimal from that point forward.
+
+            🧮 And Thus… The Bellman Equation Was Born
+            The original Bellman equation was written like this:
+
+            text
+            Copy code
+            V(s) = max_a [ R(s, a) + γ * V(s') ]
+            Where:
+
+            V(s) = value of being in state s
+
+            R(s, a) = reward for taking action a in state s
+
+            s' = the next state
+
+            γ = discount factor (how much we care about future rewards)
+
+            It recursively defines the value of a state based on the best thing you can do next.
+
+            This idea became the core of dynamic programming and later, reinforcement learning.
+
+     and then you store the loss and train based on that.
+
+     - what is an episode?
+        - in rl an episode is one complete run through the environment from the starting state to an end state like the game over a win a loss or a timeout 
+    
+        - reminder an experience is a choice that the network makes along with the current state
+    
+    - q learning algo Q(s, a) ← Q(s, a) + α * [r + γ * max_a' Q(s', a') - Q(s, a)]
+
+        - Q(s, a)
+            - update the q value for this state, action pair
+        - alpha (the learning rate)
+            - if alpha = 1 overwrite it completely if alpha = 0 don't learn at all. it controls how fast you learn
+        - r + gamma 
+            - reward for the current action + gamma the how much we care factor 
+        - last bit is best furture option and best possible reward bellman
+    - the whole term is temporal difference error
+        - basically if its big update a lot
+        - if its small its close 
+        - I haven't read much about alpha im gonna take some more notes 
+        - so alpha is how seriously we take our error 
+
+
+
+- Video #6
     - okay so this is a 4 min video and targets what seem like really important concepts to know so im gonn have a lot of gpt research notes for this video
 
     - so loss is = to mean square error (curent q, and target q)
