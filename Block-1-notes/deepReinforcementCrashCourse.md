@@ -179,7 +179,16 @@ Notes:
         - if its small its close 
         - I haven't read much about alpha im gonna take some more notes 
         - so alpha is how seriously we take our error 
+    
+    - after coming back to this I am confused about the difference between alpha and gamma
+        - alpha is how big the updates are
+        - gamma is how much future rewards matter
+    
+    - so hes defining loss and optimization but I believe those are topics for next video
 
+    - quick notes on what optimization is
+        - an optimizer is an algorithm that updates the models weights
+        - 
 
 
 - Video #6
@@ -190,6 +199,26 @@ Notes:
          - loss 
             - loss is a number that tells the model how wrong it is
                 - the difference btween what it predicted vs what the correct answer was
+            - so mean square error is basically the ((reward + gamma + bellman ford q value) - (q of the prediction))**2
+                - this is important because it takes the actual reward from the environment into account and stabilizes it using the bellman equation and gamma and then punishes hard for big errors and little for small errors cause of the 2
+                - I was confused cause what does it mean if the prediction value is "better"/ higher than the bellman target network and it still gets punished because it's basically overconfident in the wrong action. rl is an iterative and incremental approach not a one shot learning run.
+            - so alpha is learning rate and this is super important!!! i really like the graph he did in this video
+                - since mean squared error is a quadratic equation is is a parabola
+                - you have minimized loss when you get to the vertex.
+                - if alpha is too high you will just bounce off each side of the parabola and you won't be able to optimize the loss and get it to 0 cause you overcorrect the weight every time
+                - small steps are better if you have resources obviously if you can be optimal be optimal
             - 
 
+- Video #7 pytorch code
+    - this video seems like a learn by doing once i get there sort of deal maybe well review it for this blocks mini project
+
+- Video #8 testing dqn
+    - I think the rest of these videos are going to be more practical and less note taking on concepts 
+
+- Video #9 train on flappy bird
+    - 
+
+- video #10 double dqn
+    - stopped watching here seems out of scope for this block
+    
 
