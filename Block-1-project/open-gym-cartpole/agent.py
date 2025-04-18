@@ -16,4 +16,50 @@ class CartpoleAgent:
             final_epsilon: float,
             # remember this is gamma and how much it cares about future rewards
             discount_factor: float = 0.95
+            
     ):
+        
+        """Initialize a Reinforcement Learning agent with an empty dictionary
+        of state-action values (q_values), a learning rate and an epsilon.
+
+        Args:
+            env: The training environment
+            learning_rate: The learning rate
+            initial_epsilon: The initial epsilon value
+            epsilon_decay: The decay for epsilon
+            final_epsilon: The final epsilon value
+            discount_factor: The discount factor for computing the Q-value
+        """
+
+        self.env = env
+        # so in the gymnasium environmtne there is a q-value table and we reference it with self.q_values
+        # default dict creates a key for the values
+        # an array with the zeroes to the number of actions
+        self.q_values = defaultdict(lambda: np.zeros(env.action_space.n))
+
+        self.lr = learning_rate
+        self.discount_factor = discount_factor
+
+        self.epsilon = initial_epsilon
+        self.epsilon_decay = epsilon_decay
+        self.final_epsilon = final_epsilon
+
+        self.training_error = []
+
+
+    # so obs is the observation of the game state its usually a 1D numpy array that looks like this
+    # obs = np.array([position, velocity, angle, angular_velocity])
+    # we pass the observation in as the argument
+    def get_action(self, obs: np.ndarray) -> int:
+        """
+        Returns the best action with probability (1 - epsilon)
+        otherwise a random action with probability epsilon to ensure exploration.
+        """
+
+        # this is how epsilon greedy is implemented. if a random number is less than the epsilon you sample the action space and explore if it is greater you choose the network action
+
+        if np.random.random() < self.epsilon:
+            return self.env.action_space.sample()
+
+        else:
+            return int(np.argmax(self.q_values[obs]))
