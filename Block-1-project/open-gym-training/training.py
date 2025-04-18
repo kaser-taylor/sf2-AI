@@ -7,18 +7,23 @@ import numpy as np
 
 
 
-learning_rate = 0.0001
+learning_rate = 0.001
 n_episodes = 1_000_000
 start_epsilon = 1.0
 # so in the flappy bird qlearning video he decayed by multiplying by .995 gpt says there are pros and cons to doing it linearly like they have here you know exactly when epsilon will reach 0 and gives you a hard switch from exploration to exploitation and its more predictable but doesn't allow exploration towards the end
-epsilon_decay = start_epsilon / (n_episodes / 2)
+# epsilon_decay = start_epsilon / (n_episodes / 5)
+epsilon_decay = start_epsilon * .995
 # unless you do this
-final_epsilon = 0.1
+final_epsilon = 0.05
 
 # sab defines the rules of the game true = sutton and barto book rules false = open ai rules
 env = gym.make("Blackjack-v1", sab=False)
 # tracks stats about the episodes so you can plot and get artsy with the hyperparams
 env = gym.wrappers.RecordEpisodeStatistics(env, buffer_length=n_episodes)
+
+wins = 0
+draws = 0
+losses = 0
 
 agent = bagent.BlackjackAgent(
     env=env,
@@ -50,6 +55,15 @@ for episode in tqdm.tqdm(range(n_episodes)):
         # check if the game is terminated or truncated meaning out of time
         done = terminated or truncated 
     
+    if reward == 1:
+        wins += 1
+    
+    elif reward == 0:
+        draws += 1
+    
+    else: 
+        losses += 1
+
     agent.decay_epsilon()
 
 print(len(agent.training_error))
@@ -58,7 +72,7 @@ def get_moving_avgs(arr, window, mode="valid"):
     return np.convolve(np.array(arr).flatten(), np.ones(window), mode=mode) / window
 
 rolling_length = 500
-fig, axs = plt.subplots(ncols=3, figsize=(12, 5))
+fig, axs = plt.subplots(ncols=4, figsize=(16, 5))
 
 axs[0].set_title("Episode rewards")
 axs[0].plot(get_moving_avgs(env.return_queue, rolling_length, "valid"))
@@ -68,6 +82,12 @@ axs[1].plot(get_moving_avgs(env.length_queue, rolling_length, "valid"))
 
 axs[2].set_title("Training Error")
 axs[2].plot(get_moving_avgs(agent.training_error, rolling_length, "same"))
+
+win_history = [1 if r == 1 else 0 for r in env.return_queue]
+axs[3].set_title("Win Rate")
+axs[3].plot(get_moving_avgs(win_history, rolling_length, "valid"))
+axs[3].set_ylim(0, 1)
+axs[3].set_ylabel("Win Rate")
 
 plt.tight_layout()
 plt.show()

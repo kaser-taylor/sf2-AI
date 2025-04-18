@@ -1,0 +1,1 @@
+This is the final project for this block. To make this I will use the other two folders open-gym and open-gym-training as well as chatgpt to pull the q learning session together 
