@@ -62,4 +62,57 @@ class CartpoleAgent:
             return self.env.action_space.sample()
 
         else:
-            return int(np.argmax(self.q_values[obs]))
+            state = self.discretize(obs)
+            return int(np.argmax(self.q_values[state]))
+    
+    # since game state is continuous there are infinite possible values and the neural net needs discrete values to pull from and run. so this function puts those values into a fixed number of discrete bins for the update function to pull from and they end up becoming tuples which can be hashed indexed and 
+    def discretize(self, obs: np.ndarrray) -> tuple:
+        # define a bin for each state dimension eg velocity x y etc
+        bins = [
+            # the lin space values aren't empty because youre supposed to put ranges on what you expect the values to be
+            # lin space returns evenly spaced values between the start , the end, and the number of values it returns is the last number 
+            np.linspace(-4.8, 4,8, 10),
+            np.linspace(-5, 5, 10),
+            np.linspace(-0.418, 0.418, 10),
+            np.linspace(-5, 5, 10),
+        ]
+
+        # an empty list to store the values
+        discretized = []
+
+        # for i in range number of observation state vector things (velocity x y etc)
+        for i in range(len(obs)):
+            # turns the obs number into the closest bin number and appends it into our discretized value list
+            discretized.append(np.digitize(obs[i], bins[i]))
+        
+        # returns as tuple for our update function
+        return tuple(discretized)
+    
+    # I copied this update function from black jack. GPT says that in cartpole np arrays are not hashable and cannot be dictionary keys so we have to do something called discretizing which i know nothing about but I'm gonna follow its line of thinking and take some notes. 
+    def update(
+            self,
+            obs: np.ndarray,
+            action: int,
+            reward: float,
+            terminated: bool,
+            next_obs: np.ndarray
+    ):
+        """Updates the Q-value of an action."""
+        # gotta add those discrete values
+        state = self.discretize(obs)
+        next_state = self.discretize(next_obs)
+
+        future_q_values = (not terminated) * np.max(self.q_values[next_state])
+
+        temporal_difference = (
+            reward + self.discount_factor * future_q_values - self.q_values[state][action]
+        )
+
+        self.q_values[obs][action] = (
+            self.q_values[state][action] + self.lr * temporal_difference
+        )
+
+        self.training_error.append(temporal_difference)
+    
+    def decay_epsilon(self):
+        self.epsilon = max(self.final_epsilon, self.epsilon - self.epsilon_decay)
