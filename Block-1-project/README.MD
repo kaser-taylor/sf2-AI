@@ -2,6 +2,8 @@ Write a simple Python script implementing a Q-learning algorithm to solve the Ca
 
 So this is where I am gonna take notes on how i implement this 
 
+Note running basic-usage in the debugger does not work you have to use the python 3 command. 
+
 p1 can you create a list of resources and things i may need to know for this project Write a simple Python script implementing a Q-learning algorithm to solve the CartPole problem in OpenAI Gym.
 
 a1 
