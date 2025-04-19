@@ -6,7 +6,7 @@ import numpy as np
 
 # we make a class so we can encapsulate our agent so it is reusable remembers everything specific to that instance and keep organized
 class CartpoleAgent:
-    def __innit__(
+    def __init__(
             self,
             # defines a standardized structure for environments to work with reinforcement learning agents includes methods like reset() and action_space
             env: gym.Env,
@@ -66,7 +66,7 @@ class CartpoleAgent:
             return int(np.argmax(self.q_values[state]))
     
     # since game state is continuous there are infinite possible values and the neural net needs discrete values to pull from and run. so this function puts those values into a fixed number of discrete bins for the update function to pull from and they end up becoming tuples which can be hashed indexed and 
-    def discretize(self, obs: np.ndarrray) -> tuple:
+    def discretize(self, obs: np.ndarray) -> tuple:
         # define a bin for each state dimension eg velocity x y etc
         bins = [
             # the lin space values aren't empty because youre supposed to put ranges on what you expect the values to be
