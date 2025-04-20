@@ -15,7 +15,7 @@ class CartpoleAgent:
             epsilon_decay: float,
             final_epsilon: float,
             # remember this is gamma and how much it cares about future rewards
-            discount_factor: float = 0.95
+            discount_factor: float = 0.999
             
     ):
         
@@ -67,14 +67,17 @@ class CartpoleAgent:
     
     # since game state is continuous there are infinite possible values and the neural net needs discrete values to pull from and run. so this function puts those values into a fixed number of discrete bins for the update function to pull from and they end up becoming tuples which can be hashed indexed and 
     def discretize(self, obs: np.ndarray) -> tuple:
+
+        obs = np.clip(obs, [-4.8, -5, -0.418, -5], [4.8, 5, 0.418, 5])
+
         # define a bin for each state dimension eg velocity x y etc
         bins = [
             # the lin space values aren't empty because youre supposed to put ranges on what you expect the values to be
             # lin space returns evenly spaced values between the start , the end, and the number of values it returns is the last number 
-            np.linspace(-4.8, 4,8, 10),
-            np.linspace(-5, 5, 10),
-            np.linspace(-0.418, 0.418, 10),
-            np.linspace(-5, 5, 10),
+            np.linspace(-4.8, 4,8, 6),
+            np.linspace(-5, 5, 6),
+            np.linspace(-0.418, 0.418, 6),
+            np.linspace(-5, 5, 6),
         ]
 
         # an empty list to store the values
@@ -108,11 +111,15 @@ class CartpoleAgent:
             reward + self.discount_factor * future_q_values - self.q_values[state][action]
         )
 
-        self.q_values[obs][action] = (
-            self.q_values[state][action] + self.lr * temporal_difference
-        )
+        # temporal_difference = (
+        #     reward + self.discount_factor * ((future_q_values - self.q_values[state][action]) ** 2)
+        # )
 
-        self.training_error.append(temporal_difference)
+
+    
+        self.q_values[state][action] += self.lr * temporal_difference
+        self.training_error.append(abs(temporal_difference))
+
     
     def decay_epsilon(self):
-        self.epsilon = max(self.final_epsilon, self.epsilon - self.epsilon_decay)
+        self.epsilon = max(self.final_epsilon, self.epsilon * .9)

@@ -5,11 +5,18 @@ import agent as cartagent
 import matplotlib.pyplot as plt
 import numpy as np
 
-learning_rate = 0.001
-n_episodes = 100_000
+learning_rate = 0.1
+n_episodes = 30_000
 start_epsilon = 1.0
-epsilon_decay = start_epsilon / (n_episodes / 2)
-final_epsilon = 0.01
+# epsilon_decay = start_epsilon - 0.01
+# epsilon_decay = start_epsilon / (n_episodes / 2)
+epsilon_decay = start_epsilon * 0.95
+# epsilon_decay = (start_epsilon - .0001) / 2
+# epsilon_decay = (start_epsilon - .001) / (n_episodes * 0.5)
+
+
+
+final_epsilon = 0.001
 
 env = gym.make("CartPole-v1", render_mode=None)
 # only un comment this if we want to watch
@@ -37,21 +44,43 @@ for episode in tqdm.tqdm(range(n_episodes)):
     done = False
 
     while not done:
-        state = agent.discretize(obs)
         # get an action based on the current game state
-        action = agent.get_action(state)
+        action = agent.get_action(obs)
 
         # take the action and receive the results. the line below I will likely comment out because this is from black jack and im guessing the cartpole env probably outputs different values 
         # turns out its the same true means the task ends due to completion or failure, truncated ends due to time limit in cart it is 500 steps
         next_obs, reward, terminated, truncated, info = env.step(action)
         next_state = agent.discretize(next_obs)
+
+        pole_angle = obs[2]
+
+        # Reward shaping: bonus for being near vertical
+        angle_bonus = (1.0 - abs(pole_angle) / 0.418) ** 5 # Normalize: 0.418 is max angle before done
+
+        # Optional: clip between 0 and 1 so we don’t go negative
+        angle_bonus = max(angle_bonus, 0)
+
+        if angle_bonus == 0:
+            reward -= 5
+
+        # Combine it with the base reward
+        reward += angle_bonus
+
+        if truncated:
+            reward += 5
+
+        if terminated:
+            reward -= 10
+
         # updates the agent based on the result of the action taken and the q-values and reward n stuff
-        agent.update(state, action, reward, terminated, next_state)
+        agent.update(obs, action, reward, terminated, next_state)
 
         # update the current state observation
         obs = next_obs
 
         done = terminated or truncated
+    
+    agent.decay_epsilon()
 
 def get_moving_avgs(arr, window, mode="valid"):
     return np.convolve(np.array(arr).flatten(), np.ones(window), mode=mode) / window
