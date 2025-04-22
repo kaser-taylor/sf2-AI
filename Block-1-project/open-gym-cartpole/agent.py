@@ -15,7 +15,7 @@ class CartpoleAgent:
             epsilon_decay: float,
             final_epsilon: float,
             # remember this is gamma and how much it cares about future rewards
-            discount_factor: float = 0.999
+            discount_factor: float = 0.9999
             
     ):
         
