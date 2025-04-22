@@ -74,10 +74,10 @@ class CartpoleAgent:
         bins = [
             # the lin space values aren't empty because youre supposed to put ranges on what you expect the values to be
             # lin space returns evenly spaced values between the start , the end, and the number of values it returns is the last number 
-            np.linspace(-4.8, 4,8, 6),
-            np.linspace(-5, 5, 6),
-            np.linspace(-0.418, 0.418, 6),
-            np.linspace(-5, 5, 6),
+            np.linspace(-4.8, 4, 5),
+            np.linspace(-5, 5, 5),
+            np.linspace(-0.418, 0.418, 5),
+            np.linspace(-5, 5, 5),
         ]
 
         # an empty list to store the values
