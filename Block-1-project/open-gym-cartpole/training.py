@@ -5,18 +5,18 @@ import agent as cartagent
 import matplotlib.pyplot as plt
 import numpy as np
 
-learning_rate = 0.1
-n_episodes = 30_000
+learning_rate = 0.0095
+n_episodes = 20_000
 start_epsilon = 1.0
 # epsilon_decay = start_epsilon - 0.01
-# epsilon_decay = start_epsilon / (n_episodes / 2)
+epsilon_decay = start_epsilon / (n_episodes / 2)
 epsilon_decay = start_epsilon * 0.95
 # epsilon_decay = (start_epsilon - .0001) / 2
 # epsilon_decay = (start_epsilon - .001) / (n_episodes * 0.5)
 
 
 
-final_epsilon = 0.001
+final_epsilon = 0.0001
 
 env = gym.make("CartPole-v1", render_mode=None)
 # only un comment this if we want to watch
@@ -55,22 +55,22 @@ for episode in tqdm.tqdm(range(n_episodes)):
         pole_angle = obs[2]
 
         # Reward shaping: bonus for being near vertical
-        angle_bonus = (1.0 - abs(pole_angle) / 0.418) ** 5 # Normalize: 0.418 is max angle before done
+        angle_bonus = (1.0 - abs(pole_angle) / 0.418) # Normalize: 0.418 is max angle before done
 
         # Optional: clip between 0 and 1 so we don’t go negative
-        angle_bonus = max(angle_bonus, 0)
+        angle_bonus = np.clip(max(angle_bonus, 0), 0, 1)
 
-        if angle_bonus == 0:
-            reward -= 5
+        
+
 
         # Combine it with the base reward
         reward += angle_bonus
 
-        if truncated:
-            reward += 5
+        # if truncated:
+        #     reward += 1
 
         if terminated:
-            reward -= 10
+            reward -= 6
 
         # updates the agent based on the result of the action taken and the q-values and reward n stuff
         agent.update(obs, action, reward, terminated, next_state)

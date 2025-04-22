@@ -107,6 +107,7 @@ class CartpoleAgent:
 
         future_q_values = (not terminated) * np.max(self.q_values[next_state])
 
+
         temporal_difference = (
             reward + self.discount_factor * future_q_values - self.q_values[state][action]
         )
@@ -115,11 +116,11 @@ class CartpoleAgent:
         #     reward + self.discount_factor * ((future_q_values - self.q_values[state][action]) ** 2)
         # )
 
-
-    
-        self.q_values[state][action] += self.lr * temporal_difference
+        if abs(temporal_difference) > 1e-5:
+            self.q_values[state][action] += self.lr * temporal_difference
         self.training_error.append(abs(temporal_difference))
 
     
     def decay_epsilon(self):
-        self.epsilon = max(self.final_epsilon, self.epsilon * .9)
+        # self.epsilon = max(self.final_epsilon, self.epsilon - self.epsilon_decay)
+        self.epsilon = max(self.final_epsilon, self.epsilon * .995)
