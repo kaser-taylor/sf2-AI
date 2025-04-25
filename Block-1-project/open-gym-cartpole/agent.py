@@ -76,7 +76,7 @@ class CartpoleAgent:
             # lin space returns evenly spaced values between the start , the end, and the number of values it returns is the last number 
             np.linspace(-4.8, 4, 5),
             np.linspace(-5, 5, 5),
-            np.linspace(-0.418, 0.418, 5),
+            np.linspace(-0.418, 0.418, 4),
             np.linspace(-5, 5, 5),
         ]
 
