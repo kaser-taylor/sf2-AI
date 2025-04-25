@@ -1,0 +1,141 @@
+Learning resource https://github.com/mgba-emu/mgba 
+
+lesson plan:
+    Certainly! To effectively understand the mGBA emulator's codebase and its accompanying README, here's a structured 15-step plan:
+
+---
+
+### 1. **Review the README.md**
+Begin by thoroughly reading the [README.md](https://github.com/mgba-emu/mgba/blob/master/README.md) file. It provides an overview of mGBA's purpose, features, and supported platforms.
+
+---
+
+### 2. **Understand the Project Structure**
+Examine the repository's directory layout to identify key components:
+- `src/`: Contains the core emulator source code.
+- `include/`: Header files.
+- `res/`: Resources like icons and UI assets.
+- `tools/`: Auxiliary tools and utilities.
+- `doc/`: Documentation files.
+
+---
+
+### 3. **Explore the Build System**
+Review the build configuration files:
+- `CMakeLists.txt`: Main build script.
+- `.appveyor.yml`: Configuration for AppVeyor CI.
+- `.clang-format`: Code formatting rules. ([Add libretro core build option · dosbox-staging archived ... - GitHub](https://github.com/dosbox-staging/archived-discussions-for-dosbox-staging/discussions/1?utm_source=chatgpt.com))
+
+---
+
+### 4. **Set Up the Development Environment**
+Follow the instructions in the README or `PORTING.md` to set up the development environment on your system. Ensure you can build and run the emulator successfully. ([mgba/PORTING.md at master - GitHub](https://github.com/mgba-emu/mgba/blob/master/PORTING.md?utm_source=chatgpt.com), [www/faq.markdown at master · mgba-emu/www - GitHub](https://github.com/mgba-emu/www/blob/master/faq.markdown?utm_source=chatgpt.com))
+
+---
+
+### 5. **Run the Emulator**
+Execute the built emulator to familiarize yourself with its functionality. Load a Game Boy Advance ROM to see how the emulator performs. ([mgba/README.md at master - GitHub](https://github.com/mgba-emu/mgba/blob/master/README.md?utm_source=chatgpt.com))
+
+---
+
+### 6. **Study the Core Emulation Code**
+Dive into the `src/` directory to understand how mGBA emulates the Game Boy Advance hardware. Focus on modules like CPU, memory, video, and audio emulation. ([MGBA](https://en.wikipedia.org/wiki/MGBA?utm_source=chatgpt.com))
+
+---
+
+### 7. **Examine Platform-Specific Code**
+Look into the `src/platform/` directory to see how mGBA handles different platforms (e.g., Windows, macOS, Linux). Understand how platform-specific features are implemented.
+
+---
+
+### 8. **Review Input Handling**
+Understand how mGBA processes user input by examining the input handling code. This includes keyboard, mouse, and gamepad support.
+
+---
+
+### 9. **Analyze Video and Audio Output**
+Study how the emulator renders graphics and outputs sound. Look into the video rendering pipeline and audio processing modules.
+
+---
+
+### 10. **Understand Save States and Cheats**
+Explore how mGBA handles save states and cheat codes. Identify the modules responsible for saving/loading game states and applying cheats. ([MGBA](https://en.wikipedia.org/wiki/MGBA?utm_source=chatgpt.com))
+
+---
+
+### 11. **Investigate Debugging Tools**
+mGBA includes debugging features. Review the debugger implementation to understand how breakpoints, memory inspection, and other debugging tools work. ([Issues · mgba-emu/mgba - GitHub](https://github.com/mgba-emu/mgba/issues?utm_source=chatgpt.com))
+
+---
+
+### 12. **Read the CONTRIBUTING.md**
+Familiarize yourself with the project's contribution guidelines by reading the [CONTRIBUTING.md](https://github.com/mgba-emu/mgba/blob/master/CONTRIBUTING.md) file. It outlines coding standards and best practices. ([mgba/CONTRIBUTING.md at master - GitHub](https://github.com/mgba-emu/mgba/blob/master/CONTRIBUTING.md?utm_source=chatgpt.com))
+
+---
+
+### 13. **Check the CHANGES File**
+Review the [CHANGES](https://github.com/mgba-emu/mgba/blob/master/CHANGES) file to see the project's development history and recent updates.
+
+---
+
+### 14. **Explore Open Issues and Discussions**
+Visit the [Issues](https://github.com/mgba-emu/mgba/issues) section to see current bugs, feature requests, and ongoing discussions. This provides insight into the project's active development areas.
+
+---
+
+### 15. **Join the Community**
+Engage with the mGBA community through forums, chat channels, or mailing lists. Collaborating with other developers can enhance your understanding and provide support as you explore the codebase.
+
+---
+
+By following this plan, you'll gain a comprehensive understanding of the mGBA emulator's architecture, features, and development practices. ([www/faq.markdown at master · mgba-emu/www - GitHub](https://github.com/mgba-emu/www/blob/master/faq.markdown?utm_source=chatgpt.com)) 
+
+readme notes:
+    - is has turbo/fast-forwarding by holding tab
+        - this may be useful for speeding up episodes
+    - so this is something new I learned it has support for these things called mappers. gba games where way bigger than the amount of rom a gameboy could access so it uses this swap technique where it swaps things in and out of readable memory from the game cartridge. this kinda reminds me of swap from desktops
+    - it talks about building it using docker and i keep hearing that around and im gonna gpt what docker is
+        - its basically a building instruction site that shares the host os and builds an app in a mini container to run independently 
+        - how all that happens is beyond me but I get the high level concepts
+    - mgba doesn't support mac so I may have to set up a linux vm and give it some juice
+    - maybe it does support mac cause its unix
+    - it dos i just didn't recognize the reference
+    - brew commands to build it brew install cmake ffmpeg libzip qt5 sdl2 libedit lua pkg-config
+        mkdir build
+        cd build
+        cmake -DCMAKE_PREFIX_PATH=`brew --prefix qt5` ..
+        make
+    - the vscode setup is pretty complicated and mentions cuda so using metal is gonna be difficult to figure out
+    - 
+
+- ### 2. **Understand the Project Structure**
+Examine the repository's directory layout to identify key components:
+- `src/`: Contains the core emulator source code.
+- `include/`: Header files.
+- `res/`: Resources like icons and UI assets.
+- `tools/`: Auxiliary tools and utilities.
+- `doc/`: Documentation files.
+
+    - so a lot of this is written in c so im gonna paste it in gpt and ask what it does
+    - src/arm/arm.c implements the emulation of the processor used in the gameboy
+        - this function zeros out all of everything in the 'cpu' void ARMReset(struct ARMCore* cpu);
+        - so this files first thing it does is grab the instruction at the first memory location 00000 etc 
+        - this first instruction loads the bios 
+            - [ARMInit()]
+                ↓
+            [ARMReset()] → PC = 0x00000000
+                ↓
+            [ARMRun()] → ARMStep()
+                ↓
+            Prefetch 32-bit instruction at 0x00000000
+                ↓
+            Decode (using _armTable)
+                ↓
+            Execute → "b 0xC0"
+                ↓
+            PC = 0x000000C0
+                ↓
+            Continue execution...
+    - src/arm/decoder-arm.c
+        - this file takes the .gba macros and logic and turns it into a c struct that the computer can then run
+    - 
